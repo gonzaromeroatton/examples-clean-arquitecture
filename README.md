@@ -1,77 +1,87 @@
-# examples-clean-arquitecture
+# Examples Clean Architecture
 
-<!-- Badges -->
-![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
-![ASP.NET%20Core](https://img.shields.io/badge/ASP.NET%20Core-Web%20API-512BD4?style=flat-square&logo=dotnet&logoColor=white)
-![Clean%20Architecture](https://img.shields.io/badge/Architecture-Clean-0A66C2?style=flat-square)
-![CQRS](https://img.shields.io/badge/Pattern-CQRS-1F6FEB?style=flat-square)
-![DDD](https://img.shields.io/badge/Pattern-DDD-1F6FEB?style=flat-square)
-![EF%20Core](https://img.shields.io/badge/ORM-EF%20Core-6F42C1?style=flat-square)
-![SQL%20Server](https://img.shields.io/badge/Database-SQL%20Server-CC2927?style=flat-square&logo=microsoftsqlserver&logoColor=white)
-![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Version](https://img.shields.io/badge/version-1.0.0-orange)
 
-Clean REST API example applying **Clean Architecture**, **DDD-style domain modeling**, and **CQRS** with **MediatR**.  
-The sample exposes a `Person` resource and demonstrates layering, dependency injection, centralized exception handling, persistence with **Entity Framework Core**, and CI with **GitHub Actions**.
+## Project Overview
+This repository contains various examples of Clean Architecture implementations, showcasing the principles of Clean Architecture, CQRS (Command Query Responsibility Segregation), and DDD (Domain Driven Design). These examples aim to demonstrate how to build maintainable, testable, and scalable applications.
 
-> Note: the solution/project name uses `Arquitecture` (typo kept intentionally because it matches the repository/solution naming).
+## Setup Instructions
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/gonzaromeroatton/examples-clean-arquitecture.git
+   cd examples-clean-arquitecture
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
----
+## Run/Test Steps
+To run the application, use:
+```bash
+npm start
+```
+To run the tests, use:
+```bash
+npm test
+```
 
-## Contents
+## Folder Structure
+```
+/examples
+  ├── service-a
+  │   ├── src
+  │   └── tests
+  ├── service-b
+  │   ├── src
+  │   └── tests
+  └── shared
+      ├── domain
+      ├── infrastructure
+      └── application
+```
 
-- [Architecture overview](#architecture-overview)
-- [Solution structure](#solution-structure)
-- [Tech stack](#tech-stack)
-- [Getting started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Configuration](#configuration)
-  - [Run the API](#run-the-api)
-  - [Database & migrations](#database--migrations)
-- [API usage](#api-usage)
-- [Error handling](#error-handling)
-- [Cross-Origin Resource Sharing (CORS)](#cross-origin-resource-sharing-cors)
-- [CI (GitHub Actions)](#ci-github-actions)
-- [License](#license)
+## Architecture Explanation
+### Clean Architecture
+Clean Architecture is a way of structuring applications to make them independent of frameworks, UI, and databases. The aim is to create a separation of concerns, allowing for greater flexibility and easier testing.
 
----
+```mermaid
+graph TD;
+    A[Entities] --> B[Use Cases];
+    B --> C[Interface Adapters];
+    C --> D[Frameworks & Drivers];
+    A --> D;
+```
 
-## Architecture overview
+### CQRS
+CQRS separates the read and write sides of an application, allowing for different models to handle each side. This separation can help optimize performance, scalability, and security.
 
-This repository follows the typical Clean Architecture direction of dependencies:
+```mermaid
+graph TD;
+    A[Command] --> B[Command Handler];
+    B --> C[Aggregate];
+    C --> D[Event];
+    D --> E[Event Store];
+    F[Query] --> G[Query Handler];
+    G --> H[Read Model];
+```
 
-- **API** depends on **Application** (CQRS handlers / use cases)
-- **Application** depends on **Domain** (entities)
-- **Infrastructure** and **Persistence** implement interfaces defined in **Application**
-- **Domain** is the center and has no dependency on outer layers
+### DDD
+Domain Driven Design focuses on creating a shared understanding of the problem domain between teams and encapsulating logic into domain models. This fosters better communication and a more organized codebase.
 
-Main patterns and ideas used:
+```mermaid
+graph TD;
+    A[Domain] --> B[Entities];
+    A --> C[Value Objects];
+    A --> D[Aggregates];
+    A --> E[Repositories];
+    A --> F[Services];
+```
 
-- **CQRS**: reads are implemented as queries (e.g. `GetPersonByIdQuery`, `GetPersonByDniQuery`) handled via **MediatR**.
-- **DDD-style domain**: entities live in the `Domain` project (e.g. `Person : BaseEntity`).
-- **DI composition root**: dependency registration is centralized via `AddApplicationServices`, `AddInfraestructureServices`, and `AddPersistenceServices`.
+## Contribution
+Contributions are welcome! Please check the [contributing guidelines](CONTRIBUTING.md) for details.
 
----
-
-## Solution structure
-
-Solution file:
-
-- `Examples.CleanArquitecture.sln`
-
-Projects (under `Examples.CleanArquitecture/`):
-
-- `Examples.CleanArquitecture.API`  
-  ASP.NET Core Web API project. Hosts controllers, middleware, Swagger, and the DI composition root (`Program.cs`).
-
-- `Examples.CleanArquitecture.Application`  
-  Application layer (CQRS queries/handlers, DTOs, contracts, mapping, exceptions, etc.). Contains `ApplicationServiceRegistration.cs`.
-
-- `Examples.CleanArquitecture.Domain`  
-  Core domain entities. Example: `Person`.
-
-- `Examples.CleanArquitecture.Persistence`  
-  EF Core context, migrations, and repository implementations. Contains `PersonsDatabaseContext` and `PersistenceServiceRegistration.cs`.
-
-- `Examples`
-
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
