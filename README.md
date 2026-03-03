@@ -1,5 +1,16 @@
 # Examples.CleanArquitecture
 
+<!-- Badges -->
+![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
+![ASP.NET%20Core](https://img.shields.io/badge/ASP.NET%20Core-Web%20API-512BD4?style=flat-square&logo=dotnet&logoColor=white)
+![Clean%20Architecture](https://img.shields.io/badge/Architecture-Clean-0A66C2?style=flat-square)
+![CQRS](https://img.shields.io/badge/Pattern-CQRS-1F6FEB?style=flat-square)
+![DDD](https://img.shields.io/badge/Pattern-DDD-1F6FEB?style=flat-square)
+![EF%20Core](https://img.shields.io/badge/ORM-EF%20Core-6F42C1?style=flat-square)
+![SQL%20Server](https://img.shields.io/badge/Database-SQL%20Server-CC2927?style=flat-square&logo=microsoftsqlserver&logoColor=white)
+![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
 Clean REST API example applying **Clean Architecture**, **DDD-style domain modeling**, and **CQRS** with **MediatR**.  
 The sample exposes a `Person` resource and demonstrates layering, dependency injection, centralized exception handling, persistence with **Entity Framework Core**, and CI with **GitHub Actions**.
 
