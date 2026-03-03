@@ -1,4 +1,4 @@
-# Examples.CleanArquitecture
+# examples-clean-arquitecture
 
 <!-- Badges -->
 ![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=dotnet&logoColor=white)
